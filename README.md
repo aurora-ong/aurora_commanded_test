@@ -26,11 +26,11 @@ Correr instancia DB
 
 Comprobar configuración de DBs (son 2) `config/config.exs`
 
-Inicializar eventstore DB
+Inicializar eventstore DB (donde se guardan los eventos)
 `mix do event_store.create`
 `mix do event_store.init`
 
-Inicializar projector DB
+Inicializar projector DB (donde se projecta la data)
 `mix ecto.create`
 `mix ecto.migrate`
 
@@ -38,8 +38,8 @@ Utilizar `iex -S mix phx.server`
 
 Visitar [`localhost:4000`](http://localhost:4000)
 
-Enviar comando para crear unidad organizacional
+### Enviar comandos
+
+Crear unidad organizacional
 `:ok = Aurora.CommandedApplication.dispatch(%CreateUO{uo_id: "aurora", uo_name: "MetaEstado"})`
 
-Registrar membresía
-`:ok = Aurora.CommandedApplication.dispatch(%StartMembership{person_id: "pdelgado", uo_id: "aurora"})`
