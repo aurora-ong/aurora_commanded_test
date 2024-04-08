@@ -22,8 +22,6 @@ defmodule UO do
     }
   end
 
-  @spec has_active_membership?(%UO{:uo_membership => map(), optional(any()) => any()}, any()) ::
-          boolean()
   def has_active_membership?(%UO{uo_membership: uo_membership}, person_id) do
     Map.has_key?(uo_membership, person_id)
   end

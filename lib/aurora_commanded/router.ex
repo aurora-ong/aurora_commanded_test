@@ -2,7 +2,6 @@ defmodule AuroraCommanded.Router do
   use Commanded.Commands.Router
 
   dispatch CreateUO, to: CreateUOHandler, aggregate: UO, identity: :uo_id
-  dispatch CreateUO2, to: UOTreeAgreggate, identity: :uo_id
 
   dispatch RegisterPerson, to: Person, identity: :person_id
   # dispatch StartMembership, to: Start, identity: :membership_id
