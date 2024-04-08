@@ -1,0 +1,44 @@
+<.header>
+  Listing Uo table
+  <:actions>
+    <.link patch={~p"/uo_table/new"}>
+      <.button>New Uo</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="uo_table"
+  rows={@streams.uo_table}
+  >
+  <:col :let={{_id, uo}} label="Id"><%= uo.uo_id %></:col>
+  <:col :let={{_id, uo}} label="Name"><%= uo.uo_name %></:col>
+  <:col :let={{_id, uo}} label="Status"><%= uo.uo_status %></:col>
+  <:col :let={{_id, uo}} label="Created At"><%= uo.created_at %></:col>
+  <:col :let={{_id, uo}} label="Updated At"><%= uo.updated_at %></:col>
+  <:action :let={{_id, uo}}>
+    <div class="sr-only">
+      <.link navigate={~p"/uo_table/#{uo.uo_id}"}>Show</.link>
+    </div>
+    <.link patch={~p"/uo_table/#{uo.uo_id}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, uo}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: uo.uo_id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="uo-modal" show on_cancel={JS.patch(~p"/uo_table")}>
+  <.live_component
+    module={AuroraCommandedWeb.UOLive.FormComponent}
+    id={@uo.uo_id || :new}
+    title={@page_title}
+    action={@live_action}
+    uo={@uo}
+    patch={~p"/uo_table"}
+  />
+</.modal>
